@@ -12,7 +12,14 @@ namespace Xoroshiro128Plus
 
         public long Value => (long)(this._state0 + this._state1);
 
-        public int IntValue => (int)((ulong)this.Value ^ (ulong)this.Value >> 32);
+        public int IntValue
+        {
+            get
+            {
+                var value = (ulong)this.Value;
+                return (int)(value ^ value >> 32);
+            }
+        }
 
         public bool Initialized => this._state0 != default || this._state1 != default;
 
