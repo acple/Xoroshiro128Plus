@@ -32,6 +32,12 @@ namespace Xoroshiro128Plus
             return (long)(this.state0 + this.state1);
         }
 
+        public int NextInt()
+        {
+            var value = (ulong)this.Next();
+            return (int)(value ^ value >> 32);
+        }
+
         public IEnumerator<long> GetEnumerator()
         {
             var random = this; // local copy

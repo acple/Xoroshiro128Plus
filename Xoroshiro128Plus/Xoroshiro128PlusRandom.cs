@@ -12,6 +12,8 @@ namespace Xoroshiro128Plus
 
         public long Value => (long)(this._state0 + this._state1);
 
+        public int IntValue => (int)((ulong)this.Value ^ (ulong)this.Value >> 32);
+
         public bool Initialized => this._state0 != default || this._state1 != default;
 
         public Xoroshiro128PlusRandom(long seed) : this((ulong)seed, (ulong)seed ^ ulong.MaxValue)
