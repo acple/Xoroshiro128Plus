@@ -23,8 +23,15 @@ namespace Xoroshiro128Plus
 
         public bool Initialized => this._state0 != default || this._state1 != default;
 
-        public Xoroshiro128PlusRandom(long seed) : this((ulong)seed, (ulong)seed ^ ulong.MaxValue)
-        { }
+        public Xoroshiro128PlusRandom(int seed)
+        {
+            const int min = int.MinValue;
+            const int max = int.MaxValue;
+
+            var random = new Random(seed);
+            this._state0 = (ulong)random.Next(min, max) << 32 | (uint)random.Next(min, max);
+            this._state1 = (ulong)random.Next(min, max) << 32 | (uint)random.Next(min, max);
+        }
 
         public Xoroshiro128PlusRandom(ulong state0, ulong state1)
         {
